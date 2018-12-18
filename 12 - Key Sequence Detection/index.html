@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+	let pressedKeys = [];
+	const code = 'taylor';
+	window.addEventListener('keyup', (e) => {
+		pressedKeys.push(e.key);
+		pressedKeys.splice(-7, pressedKeys.length - code.length);
+		if (pressedKeys.join('') == code) {
+			alert('Unlocked!');
+			cornify();
+			pressedKeys = [];
+		}
+	})
+</script>
+</body>
+</html>
