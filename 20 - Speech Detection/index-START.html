@@ -10,9 +10,26 @@
   </div>
 
 <script>
+  // speechRecognition is global variable that lives in the browser in the window - in chrome uses webkitSpeechRecognition
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  // create instance of speechRecognition
 
+  const recognition = new SpeechRecognition();
+  recognition.interimResults = true; // as speaking will populate, if not true must pause before populating
+
+  let p = document.createElement('p');
+
+  const words = document.querySelector('.words');
+
+  words.appendChild(p);
+
+  recognition.addEventListener('result', e => {
+    console.log(e);
+  });
+
+  recognition.start();
+  
 </script>
 
 
