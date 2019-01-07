@@ -59,6 +59,25 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+
+    const arrow = document.querySelector('.arrow');
+
+    const speed = document.querySelector('.speed');
+
+    // use .watchPosition() method to continuously retrieve position
+
+    // .getCurrentPosition() will only pull position once
+
+    // .watchPosition data includes coordinates with position, heading, speed, etc
+
+
+    navigator.geolocation.watchPosition((data) => {
+      speed.textContent = data.coords.speed;
+      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+    }, (err) => {
+      console.err(err);
+      alert('Give me access to your location!');
+    });
   </script>
 </body>
 </html>
