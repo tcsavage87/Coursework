@@ -35,35 +35,48 @@
   </div>
 
 <script>
-  const slider = document.querySelector('.items');
-  let isDown = false;
-  let startX;
-  let scrollLeft;
+    const items = document.querySelector('.items');
+    let activeFlag = false;
+    let startX;
+    let scrollLeft;
 
-  slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    slider.classList.add('active');
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-  });
+    function toggleActive(e) {
+        if (activeFlag === true) {
+            items.classList.add('active');
+            startX = e.pageX - items.offsetLeft;
+            scrollLeft = items.scrollLeft;
+            console.log(scrollLeft);
+        } else {
+            items.classList.remove('active');
+        }
+    }
 
-  slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active');
-  });
+    function scrollDiv(e) {
+        e.preventDefault();
+        const x = e.pageX - items.offsetLeft;
+        const walk = (x - startX) * 2;
+        items.scrollLeft = scrollLeft - walk;
+    }
 
-  slider.addEventListener('mouseup', () => {
-    isDown = false;
-    slider.classList.remove('active');
-  });
+    items.addEventListener('mousedown', (e) => {
+        activeFlag = true;
+        toggleActive(e);
+    });
 
-  slider.addEventListener('mousemove', (e) => {
-    if (!isDown) return;  // stop the fn from running
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 3;
-    slider.scrollLeft = scrollLeft - walk;
-  });
+    items.addEventListener('mouseleave', () => {
+        activeFlag = false;
+        toggleActive();
+    });
+
+    items.addEventListener('mouseup', () => {
+        activeFlag = false;
+        toggleActive();
+    });
+
+    items.addEventListener('mousemove', (e) => {
+        if (!activeFlag) return;
+        scrollDiv(e);
+    });
 
 </script>
 
