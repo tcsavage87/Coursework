@@ -7,9 +7,9 @@ const snapButton = document.querySelector('#snap-button');
 
 function getVideo() {
 	navigator.mediaDevices.getUserMedia({ video: true, audio: false})
-		.then(function(mediaStream) {
-			video.srcObject = mediaStream;
-			video.play();
+	.then(function(mediaStream) {
+		video.srcObject = mediaStream;
+		video.play();
 	})
 	.catch(err => {
 		console.error('Oh no! You denied access to the webcam.', err);
