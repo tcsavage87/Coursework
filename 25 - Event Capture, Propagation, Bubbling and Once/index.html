@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding JavaScript's Capture</title>
+</head>
+<body class="bod">
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+<style>
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after { 
+    box-sizing: inherit; 
+  }
+
+  div {
+    width: 100%;
+    padding: 100px;
+  }
+
+  .one {
+    background: thistle;
+  }
+
+  .two {
+    background: mistyrose;
+  }
+
+  .three {
+    background: coral;
+  }
+</style>
+
+<button></button>
+<script>
+  const divs = document.querySelectorAll('div');
+
+  function logClass(e) {
+    console.log(this.classList.value);
+    //e.stopPropagation(); // stop bubbling!
+  }
+
+  divs.forEach(div => div.addEventListener('click', logClass, {
+    capture: false,
+    once: true
+  }));
+
+  // Event will bubble up the chain of nested divs if each div has event listener attached
+
+  // Add third argument of options { } within addEventListener method
+
+  // Capture - starts at highest level and zooms in until focusing on most specific.  Takes note of all levels in between and then bubbles up from most specific to highest level.
+
+  // If { capture: true }, function will run on capture, not bubble, so will fire from top-down.  By default capture: false.
+
+  // If { once: true }, event will fire once, then remove (unbind) event from the target
+
+  // Stop propagation - if within function, call e.stopPropagation(); event will not bubble further beyond first event trigger and only fire once.  Useful for shopping checkout buttons.
+
+</script>
+</body>
+</html>

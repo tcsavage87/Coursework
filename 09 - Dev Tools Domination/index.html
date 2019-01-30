@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+
+    console.log('hello');
+
+    // Interpolated - use %s to substitute argument passed after string
+
+    console.log('Hello I am a %s string!', 'great')
+
+    // Styled - use %c to substitute CSS rules passed after string
+
+    console.log('%cI am some great text', 'font-size:50px');
+
+    // warning! - displays warning flag in console
+
+    console.warn('Warning!');
+
+    // Error :| - will display error flag in the console
+
+    console.error('Invalid argument');
+
+    // Info - displays info flag in console
+
+    console.info('Humans eat 5 spiders a year');
+
+    // Testing - evaluates for truth, displays second argument if evaluates to false
+
+    console.assert(1 === 2, 'That is incorrect');
+
+    // clearing - clear console, can clear at end of the code to remove console logs
+
+    console.clear(); 
+
+    // Viewing DOM Elements
+
+    // dir will display dropdown containing all properties on passed argument (classList, children, etc)
+
+    let p = document.querySelector('p');
+
+    console.dir(p);
+
+    // Grouping together - will group console.logs containing same passed element together in console under dropdown header
+
+    console.group();
+    console.groupEnd();
+
+    console.groupCollapsed(); // use this instead of console.group() to have dropdowns auto-collapse
+
+    // counting - will count cumulative instances of console.count(x)
+
+    console.count('group'); // result 1
+    console.count('group'); // result 2
+
+    // timing - create timers to log durations of events
+
+    console.time('fetching data');
+    // run some fetch call 
+    console.timeEnd('fetching data'); // will display elapsed time between .time() and timeEnd()
+
+
+    // table - display data in table format rather than list
+
+    console.table(dogs); // pass array and will display in a table with headers including data
+
+
+  </script>
+</body>
+</html>
